@@ -63,6 +63,7 @@ func NewZookeeperDiscoveryWithStore(basePath string, kv store.Store) (*Zookeeper
 
 	ps, err := kv.List(basePath)
 	if err != nil {
+		kv.Close()
 		log.Infof("cannot get services of %s from registry: %v, err: %v", basePath, err)
 		return nil, err
 	}
